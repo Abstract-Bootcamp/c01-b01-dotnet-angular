@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>My first page title!</title>
+    <style>
+      span {
+        color: seagreen;
+        font-size: 50px;
+      }
+
+      p {
+        font-weight: 900;
+      }
+
+      body {
+        background-color: whitesmoke;
+      }
+
+      div {
+        background-color: pink;
+      }
+
+      #paragraph-area {
+        background-color: lightblue;
+      }
+
+      .yellow-bg {
+        background-color: yellow;
+      }
+
+      .border {
+        border: 1px solid black;
+
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <input type="text" id="username" />
+        <input type="password" />
+        <input type="button" value="login" onclick="login()" />
+        <input
+          type="button"
+          value="login with params"
+          onclick="loginWithParams('Welcome from HTML')"
+        />
+      </div>
+      <div class="yellow-bg">
+        <span>Please add your info to login</span>
+        <span>Make sure you entre your password</span>
+      </div>
+    </div>
+
+    <div id="paragraph-area" class="yellow-bg">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil aliquam
+        laudantium nobis optio officia veniam perferendis quia dignissimos
+        officiis, vel hic doloremque nemo sapiente possimus aspernatur, repellat
+        ex? Minima, ad!
+      </p>
+    </div>
+
+    <section class="yellow-bg">test section</section>
+
+    <div class="border">
+      <span>div no 2</span>
+    </div>
+
+    <script>
+      function login() {
+        let username = document.getElementById("username").value;
+        alert("Welcome " + username);
+      }
+
+      function loginWithParams(msg) {
+        alert(msg);
+      }
+
+      //   function register() {
+
+      //   }
+    </script>
+  </body>
+</html>
