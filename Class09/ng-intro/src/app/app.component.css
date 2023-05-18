@@ -1,0 +1,11 @@
+.app-container > label {
+  display: block;
+}
+
+.app-container > input {
+  margin-right: 5px;
+}
+
+input[type="button"] {
+  margin-top: 10px;
+}
