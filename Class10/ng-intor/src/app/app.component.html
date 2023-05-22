@@ -1,0 +1,30 @@
+<div>
+  <!-- ts to html -->
+  <span>Please enter your credentials:</span>
+
+  <br />
+
+  <input type="text" [placeholder]="textPlaceholder" [(ngModel)]="username" />
+  <input
+    type="password"
+    placeholder="{{ passwordPlaceholder }}"
+    [(ngModel)]="password"
+  />
+
+  <br />
+
+  <input type="text" [value]="username" />
+
+  <!-- html to ts -->
+  <input type="button" value="login" (click)="login()" />
+
+  <br />
+
+  <span> Welcome {{ username }} and your password is {{ password }} </span>
+
+  <br />
+
+  <span> {{ welcomeMessage }} </span>
+</div>
+
+<router-outlet></router-outlet>
