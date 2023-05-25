@@ -17,6 +17,6 @@ export class AppComponent {
   welcomeMessage = '';
 
   login() {
-    this.welcomeMessage = 'Welcome ' + this.username;
+    this.welcomeMessage = `Welcome ${this.username}`;
   }
 }

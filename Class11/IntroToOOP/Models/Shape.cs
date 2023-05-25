@@ -31,6 +31,7 @@ namespace IntroToOOP.Models
             Height = height;
             Width = width;
         }
+
         public override int GetArea()
         {
             return Width * Height;
