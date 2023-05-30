@@ -7,7 +7,7 @@
         "type": "process",
         "args": [
             "build",
-            "${workspaceFolder}/Class11/IntroToOOP/IntroToOOP.csproj",
+            "${workspaceFolder}/Class14/IntroToEf/IntroToEf.csproj",
             "/property:GenerateFullPaths=true",
             "/consoleloggerparameters:NoSummary"
         ],
@@ -19,7 +19,7 @@
         "type": "process",
         "args": [
             "publish",
-            "${workspaceFolder}/Class11/IntroToOOP/IntroToOOP.csproj",
+            "${workspaceFolder}/Class14/IntroToEf/IntroToEf.csproj",
             "/property:GenerateFullPaths=true",
             "/consoleloggerparameters:NoSummary"
         ],
@@ -33,7 +33,7 @@
             "watch",
             "run",
             "--project",
-            "${workspaceFolder}/Class11/IntroToOOP/IntroToOOP.csproj"
+            "${workspaceFolder}/Class14/IntroToEf/IntroToEf.csproj"
         ],
         "problemMatcher": "$msCompile"
     }
