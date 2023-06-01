@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeesManager.Models;
-using EmployeesManager.ViewModels;
 using EmployeesManager.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using EmployeesManager.ViewModels;
 
 namespace EmployeesManager.Controllers;
 
@@ -9,41 +11,35 @@ namespace EmployeesManager.Controllers;
 [Route("[controller]/[action]")]
 public class JobController : ControllerBase
 {
-    private readonly EmployeeContext _context;
-    public JobController(EmployeeContext context)
+    private readonly EmployeeMgrContext _context;
+    public JobController(EmployeeMgrContext context)
     {
         _context = context;
     }
 
     [HttpGet]
-    public IEnumerable<Job> Get()
+    public ActionResult<IEnumerable<JobVM>> Get()
     {
-        return _context.Jobs.ToList();
-    }
-
-    [HttpGet("{id}")]
-    public ActionResult<JobVM> Get(int id)
-    {
-        var job = _context.Jobs.Find(id);
-        if (job == null)
+        var jobs = _context.Jobs.ToList();
+        return jobs.Select(j => new JobVM
         {
-            return NotFound();
-        }
-        return new JobVM
-        {
-            Position = job.Position
-        };
+            Position = j.Position,
+            Description = j.Description,
+        }).ToList();
     }
 
     [HttpPost]
-    public IActionResult Create(JobVM job)
+    public ActionResult<int> Create(JobVM vm)
     {
         var newJob = new Job
         {
-            Position = job.Position
+            Position = vm.Position,
+            Description = vm.Description
         };
+
         _context.Jobs.Add(newJob);
+
         _context.SaveChanges();
-        return Ok();
+        return Ok(newJob.Id);
     }
 }

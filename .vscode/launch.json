@@ -10,9 +10,9 @@
         "request": "launch",
         "preLaunchTask": "build",
         // If you have changed target frameworks, make sure to update the program path.
-        "program": "${workspaceFolder}/Class14/IntroToEf/bin/Debug/net7.0/IntroToEf.dll",
+        "program": "${workspaceFolder}/Class15/EmployeesManager/bin/Debug/net7.0/EmployeesManager.dll",
         "args": [],
-        "cwd": "${workspaceFolder}/Class14/IntroToEf",
+        "cwd": "${workspaceFolder}/Class15/EmployeesManager",
         "stopAtEntry": false,
         // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
         "serverReadyAction": {

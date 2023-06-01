@@ -11,9 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EmployeesManager.Migrations
 {
-    [DbContext(typeof(EmployeeContext))]
-    [Migration("20230601121323_Add Employees Jobs")]
-    partial class AddEmployeesJobs
+    [DbContext(typeof(EmployeeMgrContext))]
+    [Migration("20230601163851_Add Jobs Table")]
+    partial class AddJobsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,19 +33,14 @@ namespace EmployeesManager.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("integer");
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("JobId");
 
                     b.ToTable("Employees");
                 });
@@ -58,6 +53,10 @@ namespace EmployeesManager.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Position")
                         .IsRequired()
                         .HasColumnType("text");
@@ -65,17 +64,6 @@ namespace EmployeesManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Jobs");
-                });
-
-            modelBuilder.Entity("EmployeesManager.Models.Employee", b =>
-                {
-                    b.HasOne("EmployeesManager.Models.Job", "Job")
-                        .WithMany()
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Job");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,7 +7,7 @@ using EmployeesManager.Models;
 
 namespace EmployeesManager.DataAccess
 {
-    public class EmployeeContext : DbContext
+    public class EmployeeMgrContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Job> Jobs { get; set; }
@@ -17,11 +17,6 @@ namespace EmployeesManager.DataAccess
             // connect to sql server with connection string from app settings
             options.UseNpgsql(
                 "Host=localhost;port=5433;Database=EmployeeManager;Username=postgres;Password=123456;IncludeErrorDetail=true;");
-        }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            // builder.Entity<Employee>().ToTable("Employees");
         }
     }
 }

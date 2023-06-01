@@ -3,6 +3,7 @@ using System;
 using EmployeesManager.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeesManager.Migrations
 {
     [DbContext(typeof(EmployeeMgrContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20230601165509_Add Job Employee Relation")]
+    partial class AddJobEmployeeRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

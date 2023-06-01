@@ -11,9 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EmployeesManager.Migrations
 {
-    [DbContext(typeof(EmployeeContext))]
-    [Migration("20230601115707_Add Employees")]
-    partial class AddEmployees
+    [DbContext(typeof(EmployeeMgrContext))]
+    [Migration("20230601154347_Add Employee Table")]
+    partial class AddEmployeeTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,8 +33,8 @@ namespace EmployeesManager.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()
