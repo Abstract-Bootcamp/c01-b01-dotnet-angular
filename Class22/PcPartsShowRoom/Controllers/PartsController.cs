@@ -23,9 +23,26 @@ public class PartsController : ControllerBase
     public async Task<IEnumerable<PartVM>> GetPartsByCategory(int categoryId)
     {
         var parts = await _context.Parts
-        .Include(p => p.SubCategory)
-        .Where(p => p.SubCategory.CategoryId == categoryId)
-        .ToListAsync();
+                    .Include(p => p.SubCategory)
+                    .ThenInclude(s => s.Category)
+                    .Where(p => p.SubCategory.CategoryId == categoryId)
+                    .ToListAsync();
+
+        // https://stackoverflow.com/questions/5010110/entityframework-join-using-join-method-and-lambdas
+        var test = _context.Parts // source
+                    .Join(_context.SubCategories, // target
+                        p => p.SubCategoryId, // FK
+                        s => s.Id,  // PK
+                        (p, s) => new { p, s }) // result
+                    .Join(_context.Categories, // target
+                        p => p.s.CategoryId, // FK
+                        c => c.Id, // PK
+                        (p, c) => new { p, c }) // result
+                    .Where(p => p.c.Id == categoryId);
+
+        var result = await test.ToListAsync();
+
+
 
         return parts.Select(p => new PartVM
         {
