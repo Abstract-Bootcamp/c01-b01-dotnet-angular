@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Item } from './items-interfaces/item';
+import { Item } from './classes/item';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ItemsService {
   }
 
   getItem(name: string): Item {
-    return this.items.find(item => item.name === name) ?? {} as Item;
+    return this.items.find(item => item.name === name) ?? new Item();
   }
 
   addOrUpdateItem(item: Item): void {
@@ -33,6 +33,9 @@ export class ItemsService {
     this.items[index] = item;
   }
 
+  // a, b ,c ,d ,e
+  // input = b
+  // output = a, c, d, e = new list
   deleteItem(name: string): void {
     this.items = this.items.filter(item => item.name !== name);
   }
