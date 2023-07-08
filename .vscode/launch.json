@@ -10,9 +10,9 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/Class26/NgReview/bin/Debug/net7.0/NgReview.dll",
+      "program": "${workspaceFolder}/Class27/NgReview/bin/Debug/net7.0/NgReview.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Class26/NgReview",
+      "cwd": "${workspaceFolder}/Class27/NgReview",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {
