@@ -1,5 +1,27 @@
 <form (ngSubmit)="onSubmit()">
-  <div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Pizza"
+      name="name"
+      [(ngModel)]="item.name"
+      required
+    />
+    <mat-error> Please enter a valid name </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Ex. It makes me feel..."
+      name="description"
+      [(ngModel)]="item.description"
+    ></textarea>
+  </mat-form-field>
+
+  <!-- <div>
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" [(ngModel)]="item.name" required />
   </div>
@@ -11,7 +33,7 @@
       [(ngModel)]="item.description"
       required
     ></textarea>
-  </div>
+  </div> -->
 
-  <button type="submit">Save</button>
+  <button mat-raised-button color="primary" type="submit">Save</button>
 </form>

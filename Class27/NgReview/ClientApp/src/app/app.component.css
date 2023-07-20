@@ -1,0 +1,13 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-container {
+  height: 100%;
+}
+.example-sidenav button {
+  display: block;
+  width: 100%;
+}
+.example-sidenav {
+  width: 300px;
+}

@@ -1,7 +1,55 @@
 <body>
-  <app-nav-menu></app-nav-menu>
+  <mat-toolbar>
+    <button
+      (click)="drawer.toggle()"
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-button color="accent" [routerLink]="'/fetch-data'">
+      Fetch data
+    </button>
 
-  <main class="container">
-    <router-outlet></router-outlet>
-  </main>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      color="accent"
+      [routerLink]="['/']"
+      aria-label="Example icon button with a home icon"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-drawer-container class="example-container" autosize hasBackdrop="true">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <button mat-button color="accent" [routerLink]="['/counter']">
+        Counter
+      </button>
+      <mat-divider></mat-divider>
+
+      <button mat-button color="accent" [routerLink]="['/items']">Items</button>
+      <mat-divider></mat-divider>
+
+      <button mat-button color="accent" [routerLink]="['/fetch-data']">
+        Fetch data
+      </button>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <main class="container">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </mat-drawer-container>
 </body>
