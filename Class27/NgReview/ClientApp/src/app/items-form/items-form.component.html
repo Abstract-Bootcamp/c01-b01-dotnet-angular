@@ -1,39 +1,27 @@
+<mat-label>This should have value from parent: {{ testInput }}</mat-label>
+
 <form (ngSubmit)="onSubmit()">
   <mat-form-field class="example-full-width">
     <mat-label>Name</mat-label>
     <input
       matInput
-      placeholder="Ex. Pizza"
+      placeholder="Enter new Name"
       name="name"
       [(ngModel)]="item.name"
       required
     />
-    <mat-error> Please enter a valid name </mat-error>
+    <mat-error> Please enter the name!!!! </mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Description</mat-label>
     <textarea
       matInput
-      placeholder="Ex. It makes me feel..."
+      placeholder="Description"
       name="description"
       [(ngModel)]="item.description"
     ></textarea>
   </mat-form-field>
 
-  <!-- <div>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" [(ngModel)]="item.name" required />
-  </div>
-  <div>
-    <label for="description">Description:</label>
-    <textarea
-      name="description"
-      id="description"
-      [(ngModel)]="item.description"
-      required
-    ></textarea>
-  </div> -->
-
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button type="submit" mat-raised-button color="primary">Save</button>
 </form>

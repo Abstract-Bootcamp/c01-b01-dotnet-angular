@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ItemsContainerComponent {
 
+  test = "this value from parent component";
+  outputValue = '';
+
+  onFormSubmit(value: string) {
+    this.outputValue = value;
+  }
 }

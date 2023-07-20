@@ -1,2 +1,6 @@
-<app-items-form></app-items-form>
+<app-items-form
+  [testInput]="test"
+  (testOutput)="onFormSubmit($event)"
+></app-items-form>
+<span>{{ outputValue }}</span>
 <app-items-details></app-items-details>

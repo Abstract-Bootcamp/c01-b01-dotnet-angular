@@ -6,7 +6,7 @@ import { Item } from './classes/item';
   providedIn: 'root'
 })
 export class ItemsService {
-  private items: Item[] = [];
+  private items: Item[] = [];//[x001]
 
   getItems(): Item[] {
     return this.items;

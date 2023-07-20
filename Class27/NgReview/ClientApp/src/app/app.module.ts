@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -38,15 +37,14 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    MatSidenavModule,
-    NgIf,
-    MatButtonModule,
     MatToolbarModule,
+    MatButtonModule,
     MatIconModule,
-    MatTableModule,
     MatDividerModule,
+    MatSidenavModule,
     MatInputModule,
     MatFormFieldModule,
+    MatTableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
