@@ -10,13 +10,21 @@ export class FetchDataComponent implements OnInit {
   displayedColumns: string[] = ['date', 'temperatureC', 'temperatureF', 'summary', 'actions'];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+
   }
 
   ngOnInit(): void {
     const forecasts$ = this.http.get<WeatherForecast[]>(this.baseUrl + 'weatherforecast');
+
     forecasts$.subscribe(result => {
       this.forecasts = result;
+      this.forecasts.forEach(forecast => {
+        console.log(forecast.date);
+      });
     });
+  }
+
+  delete(item: WeatherForecast) {
   }
 }
 
