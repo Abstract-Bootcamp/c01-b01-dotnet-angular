@@ -1,6 +1,15 @@
+using PcPartsManager;
+using PcPartsManager.Middleware;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationContext>(options =>
+{
+    options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -13,6 +22,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<GlobalExceptionHandler>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
