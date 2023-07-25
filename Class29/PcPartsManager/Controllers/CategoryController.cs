@@ -41,4 +41,11 @@ public class CategoryController : ControllerBase
         return Ok();
     }
 
+    [HttpDelete("{id}")]
+    public async Task Delete(int id)
+    {
+        var category = await _context.Categories.FindAsync(id);
+        _context.Categories.Remove(category);
+        await _context.SaveChangesAsync();
+    }
 }
