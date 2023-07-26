@@ -1,0 +1,20 @@
+<p>categories-list works!</p>
+
+<ul>
+  <li *ngFor="let item of items">
+    <div>
+      {{ item.name }}
+    </div>
+    <div>
+      <app-delete-category
+        [id]="item.id"
+        (onDelete)="delete($event)"
+      ></app-delete-category>
+    </div>
+    <div>
+      <button>Edit</button>
+    </div>
+  </li>
+</ul>
+
+<button routerLink="/add-category">Add Category</button>
