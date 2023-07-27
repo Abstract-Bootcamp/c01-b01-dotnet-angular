@@ -1,20 +1,30 @@
 <p>categories-list works!</p>
 
-<ul>
-  <li *ngFor="let item of items">
-    <div>
-      {{ item.name }}
-    </div>
-    <div>
-      <app-delete-category
-        [id]="item.id"
-        (onDelete)="delete($event)"
-      ></app-delete-category>
-    </div>
-    <div>
-      <button>Edit</button>
-    </div>
-  </li>
-</ul>
+<table
+  mat-table
+  [dataSource]="items.data"
+  class="mat-elevation-z8"
+  *ngIf="items?.data"
+>
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator
+  [length]="resultsLength"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[1, 2, 5, 10, 100]"
+  [showFirstLastButtons]="true"
+  (page)="handlePageEvent($event)"
+  aria-label="Select page of GitHub search results"
+></mat-paginator>
 
 <button routerLink="/add-category">Add Category</button>

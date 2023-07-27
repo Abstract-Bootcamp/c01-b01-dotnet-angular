@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 
 import { Category } from '../interfaces/category';
+import { CategoryPagination } from '../interfaces/categoryPagination';
 
 @Component({
   selector: 'app-categories-list',
@@ -9,7 +11,12 @@ import { Category } from '../interfaces/category';
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  items: Category[] = [];
+  resultsLength = 0;
+  pageSize = 2;
+  pageIndex = 0;
+
+  items: CategoryPagination;
+  displayedColumns: string[] = ['name'];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
@@ -24,9 +31,21 @@ export class CategoriesListComponent implements OnInit {
   }
 
   refresh() {
-    this.http.get<Category[]>(this.baseUrl + 'category/get').subscribe(result => {
-      this.items = result;
-    });
+    this.http.get<CategoryPagination>(
+      `${this.baseUrl}category/get?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`)
+      .subscribe(result => {
+        this.items = result;
+        this.resultsLength = result.total;
+      });
   }
+
+  handlePageEvent(e: PageEvent) {
+    // this.pageEvent = e;
+    // this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.refresh();
+  }
+
 
 }

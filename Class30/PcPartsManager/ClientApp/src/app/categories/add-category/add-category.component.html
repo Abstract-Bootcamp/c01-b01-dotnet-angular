@@ -2,5 +2,5 @@
 <form (ngSubmit)="addCategory()">
   <label>Name</label>
   <input type="text" name="name" [(ngModel)]="name" />
-  <button type="submit">Add</button>
+  <button type="submit">{{ id ? "Edit" : "Add" }}</button>
 </form>

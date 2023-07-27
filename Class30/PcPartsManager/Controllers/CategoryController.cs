@@ -19,14 +19,33 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<CategoryVM>> Get()
+    public async Task<Pagination<CategoryVM>> Get(int pageIndex, int pageSize)
     {
-        var categories = await _context.Categories.ToListAsync();
-        return categories.Select(p => new CategoryVM
+        var query = _context.Categories;
+        int total = query.Count();
+        var categories = await query.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync();
+        var result = categories.Select(p => new CategoryVM
         {
             Id = p.Id,
             Name = p.Name
         }).ToList();
+
+        return new Pagination<CategoryVM>
+        {
+            Total = total,
+            Data = result
+        };
+    }
+
+    [HttpGet("{id}")]
+    public async Task<CategoryVM> Get(int id)
+    {
+        var category = await _context.Categories.SingleOrDefaultAsync(categories => categories.Id == id);
+        return new CategoryVM
+        {
+            Id = category.Id,
+            Name = category.Name
+        };
     }
 
     [HttpPost]
@@ -37,6 +56,15 @@ public class CategoryController : ControllerBase
             Name = vm.Name
         };
         _context.Categories.Add(category);
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Edit(int id, CreateCategoryVM vm)
+    {
+        var category = await _context.Categories.FindAsync(id);
+        category.Name = vm.Name;
         await _context.SaveChangesAsync();
         return Ok();
     }
