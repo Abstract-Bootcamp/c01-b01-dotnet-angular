@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PcPartsManager.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace PcPartsManager;
 
-public class ApplicationContext : IdentityDbContext<User>
+public class ApplicationContext : DbContext
 {
     public DbSet<Part> Parts { get; set; }
     public DbSet<SubCategory> SubCategories { get; set; }
