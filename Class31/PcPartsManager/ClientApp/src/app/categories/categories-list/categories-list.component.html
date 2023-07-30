@@ -1,4 +1,4 @@
-<p>categories-list works!</p>
+<p html-highlight>categories-list works!</p>
 <mat-spinner *ngIf="!items"></mat-spinner>
 <table
   *ngIf="items"
@@ -18,6 +18,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
 <mat-paginator
   (page)="handlePageEvent($event)"
   [length]="length"
@@ -28,22 +29,4 @@
 >
 </mat-paginator>
 
-<!-- 
-<ul>
-  <li *ngFor="let item of items">
-    <div>
-      {{ item.name }}
-    </div>
-    <div>
-      <app-delete-category
-        [id]="item.id"
-        (onDelete)="delete($event)"
-      ></app-delete-category>
-    </div>
-    <div>
-      <button [routerLink]="['/edit-category/' + item.id]">Edit</button>
-    </div>
-  </li>
-</ul> -->
-
-<button routerLink="/add-category">Add Category</button>
+<button routerLink="/add-category" html-highlight>Add Category</button>

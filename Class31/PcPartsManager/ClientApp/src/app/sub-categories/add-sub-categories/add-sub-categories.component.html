@@ -9,7 +9,7 @@
   <label>Category</label>
 
   <select name="categories" [(ngModel)]="categoryId">
-    <option *ngFor="let item of items" [value]="item.id">
+    <option *ngFor="let item of items" html-highlight [value]="item.id">
       {{ item.name }}
     </option>
   </select>

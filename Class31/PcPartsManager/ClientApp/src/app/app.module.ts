@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -13,7 +13,9 @@ import { AddCategoryComponent } from './categories/add-category/add-category.com
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { DeleteCategoryComponent } from './categories/delete-category/delete-category.component';
 import { CounterComponent } from './counter/counter.component';
+import { HighlightDirective } from './directives/highlight.directive';
 import { HomeComponent } from './home/home.component';
+import { HttpLoggingInterceptor } from './interceptors/http-logging.interceptor';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import {
   AddSubCategoriesComponent
@@ -33,6 +35,7 @@ import {
     DeleteCategoryComponent,
     SubCategoriesListComponent,
     AddSubCategoriesComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,7 +56,9 @@ import {
     ]),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
