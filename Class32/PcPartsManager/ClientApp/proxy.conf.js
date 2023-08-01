@@ -9,6 +9,7 @@ const PROXY_CONFIG = [
       "/category",
       "/subcategory",
       "/parts",
+      "/auth"
     ],
     target: target,
     secure: false,
