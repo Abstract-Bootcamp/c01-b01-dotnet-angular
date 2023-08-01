@@ -1,1 +1,65 @@
-<p>register works!</p>
+<form [formGroup]="form" (ngSubmit)="register()" class="registration-form">
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="username"
+      placeholder="Ex. pat123"
+    />
+    <mat-error *ngIf="form.get('username')?.hasError('required')">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. pat@example.com"
+    />
+    <mat-error
+      *ngIf="
+        form.get('email')?.hasError('email') &&
+        !form.get('email')?.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Ex. ••••••••"
+    />
+    <mat-error *ngIf="form.get('password')?.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Confirm Password</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="confirmPassword"
+      placeholder="Ex. ••••••••"
+    />
+    <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">
+      Confirm Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="form.get('confirmPassword')?.hasError('confirmPassword')">
+      Passwords do not match
+    </mat-error>
+  </mat-form-field>
+  <mat-checkbox formControlName="isAdmin">Is Admin</mat-checkbox>
+  <div class="form-buttons">
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </div>
+</form>
