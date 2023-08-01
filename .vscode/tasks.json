@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/Class27/NgReview/NgReview.csproj",
+        "${workspaceFolder}/Class32/PcPartsManager/PcPartsManager.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/Class27/NgReview/NgReview.csproj",
+        "${workspaceFolder}/Class32/PcPartsManager/PcPartsManager.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -33,7 +33,7 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/Class27/NgReview/NgReview.csproj"
+        "${workspaceFolder}/Class32/PcPartsManager/PcPartsManager.csproj"
       ],
       "problemMatcher": "$msCompile"
     }

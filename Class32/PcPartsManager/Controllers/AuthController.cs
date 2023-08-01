@@ -18,13 +18,13 @@ namespace PcPartsManager.Controllers;
 [Authorize]
 [ApiController]
 [Route("[controller]/[action]")]
-public class UserController : ControllerBase
+public class AuthController : ControllerBase
 {
     public readonly ApplicationContext _context;
     public readonly UserManager<User> _userManager;
     public readonly SignInManager<User> _signInManager;
     public readonly IConfiguration _config;
-    public UserController(
+    public AuthController(
         ApplicationContext context,
         UserManager<User> userManager,
         SignInManager<User> signInManager,
@@ -67,7 +67,7 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult> Register(RegisterViewModel model)
+    public async Task<ActionResult> Register([FromBody] RegisterViewModel model)
     {
         if (ModelState.IsValid)
         {
