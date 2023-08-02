@@ -1,0 +1,6 @@
+<p>add-category works!</p>
+<form (ngSubmit)="addOrEditCategory()">
+  <label>Name</label>
+  <input type="text" name="name" [(ngModel)]="name" />
+  <button type="submit">{{ id ? "Edit" : "Add" }}</button>
+</form>
