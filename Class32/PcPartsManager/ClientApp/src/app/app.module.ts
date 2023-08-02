@@ -9,8 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-// import { LoginComponent } from './auth/login/login.component';
-// import { RegisterComponent } from './auth/register/register.component';
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { DeleteCategoryComponent } from './categories/delete-category/delete-category.component';
@@ -38,8 +36,6 @@ import {
     SubCategoriesListComponent,
     AddSubCategoriesComponent,
     HighlightDirective,
-    // LoginComponent,
-    // RegisterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
