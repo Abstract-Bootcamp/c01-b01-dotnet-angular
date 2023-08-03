@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PcPartsManager.Models
 {
-    public class SubCategory
+    public class SubCategory : AuditableEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

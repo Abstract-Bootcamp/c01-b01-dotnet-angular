@@ -3,6 +3,7 @@ import { catchError, EMPTY } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Data } from '@angular/router';
 
 import { Register } from './interfaces/register';
 
@@ -10,6 +11,7 @@ import { Register } from './interfaces/register';
   providedIn: 'root'
 })
 export class AuthService {
+
   accessToken: string = 'access-token';
 
   constructor(private http: HttpClient,
@@ -57,5 +59,21 @@ export class AuthService {
 
   getAuthorizationToken(): string {
     return localStorage.getItem(this.accessToken) || '';
+  }
+
+
+  hasPermission(permissions: string[]): boolean {
+    const token = jwt_decode<any>(this.getAuthorizationToken());
+    let hasPermission = true;
+
+    for (let index = 0; index < permissions.length; index++) {
+      const permission = permissions[index];
+      if (!token[permission]) {
+        hasPermission = false;
+        break;
+      }
+    }
+
+    return hasPermission;
   }
 }
