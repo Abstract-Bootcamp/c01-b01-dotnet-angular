@@ -58,4 +58,33 @@ export class AuthService {
   getAuthorizationToken(): string {
     return localStorage.getItem(this.accessToken) || '';
   }
+
+  hasPermission(permissions: string[]): boolean {
+    if (!this.isLoggedIn()) {
+      return false;
+    }
+
+    if (permissions.length === 0) {
+      return true;
+    }
+
+    let token = jwt_decode<any>(localStorage.getItem(this.accessToken) ?? '');
+
+    if (!token) {
+      return false;
+    }
+
+    let hasPermission = true;
+
+    for (let index = 0; index < permissions.length; index++) {
+      const permission = permissions[index];
+
+      if (!token[permission]) {
+        hasPermission = false;
+        break;
+      }
+    }
+
+    return hasPermission;
+  }
 }

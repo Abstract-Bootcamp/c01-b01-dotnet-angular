@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PcPartsManager.Models
 {
-    public class Part
+    public class Part : AuditedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

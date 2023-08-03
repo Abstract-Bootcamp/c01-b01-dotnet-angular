@@ -10,9 +10,12 @@ namespace PcPartsManager
         // policies
         public const string AdminPolicyName = "admin";
         public const string UserPolicyName = "user";
+        public const string ViewCategoryPolicy = "viewCategory";
 
         // claims
         public const string AdminClaimName = "admin";
         public const string UserClaimName = "user";
+        public const string CategoryClaim = "category";
+        public const string ViewCategoryClaim = "category.view";
     }
 }

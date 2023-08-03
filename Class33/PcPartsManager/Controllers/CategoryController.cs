@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PcPartsManager.ViewModels;
 using PcPartsManager.ViewModels.Category;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PcPartsManager.Controllers;
 
@@ -19,6 +20,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = IdentityData.ViewCategoryPolicy)]
     public async Task<IEnumerable<CategoryVM>> Get()
     {
         var categories = await _context.Categories.ToListAsync();
