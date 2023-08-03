@@ -87,6 +87,8 @@ public class AuthController : ControllerBase
                 {
                     // add user claim
                     claims.Add(new Claim(IdentityData.UserClaimName, IdentityData.UserClaimName));
+                    claims.Add(new Claim(IdentityData.CategoryClaim, IdentityData.CategoryClaim));
+                    claims.Add(new Claim(IdentityData.ViewCategoryClaim, IdentityData.ViewCategoryClaim));
                 }
 
                 await _userManager.AddClaimsAsync(user, claims);

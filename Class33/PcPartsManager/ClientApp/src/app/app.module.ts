@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,7 @@ import { CategoriesListComponent } from './categories/categories-list/categories
 import { DeleteCategoryComponent } from './categories/delete-category/delete-category.component';
 import { CounterComponent } from './counter/counter.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { HasPermissionGuard } from './has-permission.guard';
 import { HomeComponent } from './home/home.component';
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -57,10 +59,16 @@ import {
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
-      { path: 'categories', component: CategoriesListComponent },
+      {
+        path: 'categories',
+        component: CategoriesListComponent,
+        canActivate: [HasPermissionGuard],
+        data: { permissions: ['category', 'category.view'] }
+      },
       { path: 'add-category', component: AddCategoryComponent },
       { path: 'edit-category/:id', component: AddCategoryComponent },
       { path: 'counter', component: CounterComponent },

@@ -42,9 +42,11 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(o =>
 {
-    // o.AddPolicy("Admin", policy => policy.RequireClaim("Admin").RequireClaim("Read").RequireClaim("Write"));
     o.AddPolicy(IdentityData.AdminPolicyName, policy => policy.RequireClaim(IdentityData.AdminClaimName));
     o.AddPolicy(IdentityData.UserPolicyName, policy => policy.RequireClaim(IdentityData.UserClaimName));
+    o.AddPolicy(IdentityData.ViewCategoryPolicy, policy => policy
+        .RequireClaim(IdentityData.CategoryClaim)
+        .RequireClaim(IdentityData.ViewCategoryClaim));
 });
 
 builder.Services.AddControllersWithViews();
