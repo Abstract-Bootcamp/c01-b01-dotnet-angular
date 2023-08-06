@@ -6,6 +6,7 @@ using PcPartsManager.ViewModels;
 using PcPartsManager.ViewModels.Category;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using PcPartsManager.Repositories;
 
 namespace PcPartsManager.Controllers;
 
@@ -13,17 +14,19 @@ namespace PcPartsManager.Controllers;
 [Route("[controller]/[action]")]
 public class CategoryController : ControllerBase
 {
-    private readonly ApplicationContext _context;
-    public CategoryController(ApplicationContext context)
+    private readonly ICategoryRepository _repository;
+    private readonly IUnitOfWork _uow;
+    public CategoryController(ICategoryRepository repository, IUnitOfWork uow)
     {
-        _context = context;
+        _repository = repository;
+        _uow = uow;
     }
 
     [HttpGet]
     [Authorize(Policy = IdentityData.ViewCategoryPolicy)]
     public async Task<IEnumerable<CategoryVM>> Get()
     {
-        var categories = await _context.Categories.ToListAsync();
+        var categories = await _repository.GetAllAsync();
         return categories.Select(p => new CategoryVM
         {
             Id = p.Id,
@@ -33,32 +36,16 @@ public class CategoryController : ControllerBase
 
 
     [HttpGet]
-    public async Task<Pagination<CategoryVM>> GetPagination(int pageIndex, int pageSize)// query string
+    public async Task<Pagination<CategoryVM>> GetPagination(int pageIndex, int pageSize)
     {
-        /// 1 ,2 , 3, 4, 5, 6, 7, 8,
-        var query = _context.Categories;
-        var length = query.Count();
-
-        var categories = await query.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync();
-
-        var result = categories.Select(p => new CategoryVM
-        {
-            Id = p.Id,
-            Name = p.Name
-        }).ToList();
-
-        return new Pagination<CategoryVM>
-        {
-            Length = length,
-            Data = result
-        };
+        return await _repository.GetPagination(pageIndex, pageSize);
     }
 
 
     [HttpGet("{id}")]
     public async Task<CategoryVM> Get(int id)
     {
-        var category = await _context.Categories.SingleOrDefaultAsync(categories => categories.Id == id);
+        var category = await _repository.GetByIdAsync(id);
         return new CategoryVM
         {
             Id = category.Id,
@@ -73,25 +60,26 @@ public class CategoryController : ControllerBase
         {
             Name = vm.Name
         };
-        _context.Categories.Add(category);
-        await _context.SaveChangesAsync();
+        await _repository.AddAsync(category);
+        await _uow.CompleteAsync();
         return Ok();
     }
 
     [HttpDelete("{id}")]
     public async Task Delete(int id)
     {
-        var category = await _context.Categories.FindAsync(id);
-        _context.Categories.Remove(category);
-        await _context.SaveChangesAsync();
+        await _repository.DeleteAsync(id);
+        await _uow.CompleteAsync();
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit(int id, CreateCategoryVM vm)
     {
-        var category = await _context.Categories.FindAsync(id);
+        var category = await _repository.GetByIdAsync(id);
         category.Name = vm.Name;
-        await _context.SaveChangesAsync();
+        _repository.Update(category);
+
+        await _uow.CompleteAsync();
         return Ok();
     }
 }

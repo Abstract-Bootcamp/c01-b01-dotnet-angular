@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace PcPartsManager.Models
 {
-    public interface IAuditedEntity
+
+    public interface IEntity { }
+
+    public interface IAuditedEntity : IEntity
     {
         DateTime CreatedOn { get; set; }
         DateTime ModifiedOn { get; set; }
