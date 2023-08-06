@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PcPartsManager.Models
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, IEntity
     {
 
     }
